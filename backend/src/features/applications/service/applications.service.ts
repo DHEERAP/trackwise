@@ -22,7 +22,11 @@ export const applicationsService = {
   },
 
   create: async (userId: string, data: Partial<IApplication>) => {
-    return applicationsRepository.create({ ...data, userId } as Partial<IApplication>);
+    const { Types } = await import('mongoose');
+    return applicationsRepository.create({
+      ...data,
+      userId: new Types.ObjectId(userId),
+    } as Partial<IApplication>);
   },
 
   update: async (id: string, userId: string, data: Partial<IApplication>) => {

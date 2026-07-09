@@ -1,4 +1,4 @@
-import { Request } from 'express';
+import { Request, Response } from 'express';
 import { IUser } from './user.types';
 
 export interface AuthRequest extends Request {
