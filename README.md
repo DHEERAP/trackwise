@@ -2,7 +2,105 @@
 
 > A production-ready SaaS Job Application & Interview Tracker built for serious job seekers.
 
-![TrackWise Dashboard](https://via.placeholder.com/1200x600?text=TrackWise+Dashboard)
+**🔗 Live Demo → [https://trackwise-9eug.vercel.app/login](https://trackwise-9eug.vercel.app/login)**
+
+---
+
+## Why I Built TrackWise
+
+While preparing for campus placements and off-campus opportunities, I realized that managing multiple job applications became increasingly difficult. Important information such as recruiter contacts, interview schedules, follow-up dates, and application status was scattered across emails, LinkedIn messages, WhatsApp conversations, and personal notes.
+
+This project was built as a focused MVP to solve that problem by providing a single dashboard where job seekers can organize their entire application journey.
+
+---
+
+## Problem Discovery
+
+Job seekers frequently apply to multiple companies simultaneously.
+
+Common challenges include:
+
+- Forgetting interview schedules
+- Missing follow-up dates
+- Losing recruiter contact information
+- Tracking application status manually
+- Switching between multiple tools (Gmail, LinkedIn, Notes, Excel)
+
+The objective of TrackWise is to reduce this friction by centralizing the entire workflow.
+
+---
+
+## Assumptions
+
+This MVP is designed around the following assumptions:
+
+- Users apply to multiple companies in parallel.
+- Users want one centralized dashboard.
+- Simple workflows are preferred over feature-heavy solutions.
+- Most users primarily access the application from desktop devices.
+
+---
+
+## Product & Design Decisions
+
+The project intentionally focuses on solving one problem well instead of supporting every possible recruitment workflow.
+
+Key decisions:
+
+- Dashboard-first design for quick visibility.
+- Minimal navigation to reduce cognitive load.
+- Status pipeline mirrors a typical hiring process.
+- Search and filters reduce time spent finding applications.
+- Responsive interface for desktop and mobile.
+
+---
+
+## Engineering Decisions
+
+### Next.js
+Chosen for file-based routing, excellent developer experience, and optimized rendering.
+
+### TypeScript
+Improves maintainability and reduces runtime errors across both frontend and backend.
+
+### MongoDB
+A flexible document model matches the evolving structure of job application data without rigid schema migrations.
+
+### TanStack Query
+Provides caching, background synchronization, and simplified server-state management without Redux boilerplate.
+
+### Zustand
+A lightweight state management solution for authentication state without unnecessary complexity.
+
+### Repository Pattern (Backend)
+Controllers → Services → Repositories → Models. Keeps database queries isolated, making the codebase testable and swappable.
+
+### JWT via HTTP-only Cookies
+Storing tokens in localStorage is an XSS risk. HTTP-only cookies prevent client-side JavaScript from accessing the token.
+
+---
+
+## AI Collaboration
+
+AI tools were used throughout the project as engineering assistants rather than code replacements.
+
+**Amazon Q (AWS)**
+- Architected the full-stack project structure
+- Generated production-ready boilerplate across all layers
+- Suggested component extraction and reusable patterns
+- Reviewed folder organization and clean architecture decisions
+
+**ChatGPT**
+- Brainstormed product ideas
+- Helped structure documentation
+- Reviewed UI copy
+
+**Cursor**
+- Accelerated repetitive CRUD implementation
+- Assisted with refactoring
+- Suggested component extraction
+
+All generated code was reviewed, tested, and modified before being integrated into the project.
 
 ---
 
@@ -220,7 +318,6 @@ Backend runs on `http://localhost:5000`
 ## Deployment
 
 ### Frontend → Vercel
-
 1. Push code to GitHub
 2. Import repo in [Vercel](https://vercel.com)
 3. Set root directory to `frontend`
@@ -228,7 +325,6 @@ Backend runs on `http://localhost:5000`
 5. Deploy
 
 ### Backend → Render
-
 1. Push code to GitHub
 2. Create new **Web Service** in [Render](https://render.com)
 3. Set root directory to `backend`
@@ -240,7 +336,7 @@ Backend runs on `http://localhost:5000`
 ### MongoDB Atlas
 1. Create free cluster at [MongoDB Atlas](https://cloud.mongodb.com)
 2. Create database user
-3. Whitelist `0.0.0.0/0` for Render (or use Render's static IPs)
+3. Whitelist `0.0.0.0/0` for Render
 4. Copy connection string to `MONGO_URI`
 
 ---
@@ -250,59 +346,54 @@ Backend runs on `http://localhost:5000`
 ### Authentication
 - [ ] Register with valid data creates account and redirects to dashboard
 - [ ] Register with existing email shows conflict error
-- [ ] Register with weak password shows validation error
 - [ ] Login with correct credentials works
-- [ ] Login with wrong password shows error
 - [ ] Logout clears session and redirects to login
 - [ ] Accessing `/dashboard` without auth redirects to `/login`
-- [ ] Accessing `/login` while authenticated redirects to `/dashboard`
 
 ### Applications
 - [ ] Create application with required fields only
-- [ ] Create application with all fields
-- [ ] Validation errors shown for invalid URLs and emails
 - [ ] Edit application updates all fields correctly
 - [ ] Delete application removes it from list
 - [ ] Archive hides from active list
 - [ ] Restore brings back from archived list
 - [ ] Inline status change updates without opening form
+- [ ] Search filters results in real time
+- [ ] Status, priority, platform filters work
 - [ ] Pagination works correctly
-- [ ] Search filters results in real time (debounced)
-- [ ] Status filter works
-- [ ] Priority filter works
-- [ ] Platform filter works
-- [ ] Sort by newest/oldest/alphabetical/interview works
-- [ ] Clear filters resets all filters
 
 ### Dashboard
 - [ ] Stats reflect correct counts
-- [ ] Upcoming interviews show future interviews sorted by date
+- [ ] Upcoming interviews show future interviews
 - [ ] Follow-ups due show overdue items
 - [ ] Recent applications show 5 most recent
-- [ ] Pipeline overview percentages add up correctly
-- [ ] Quick actions navigate to correct pages
 
 ### Analytics
 - [ ] Monthly chart shows correct data
 - [ ] Status distribution pie chart renders
 - [ ] Platform chart renders
 - [ ] Offer rate and interview rate calculated correctly
-- [ ] Empty state shown when no data
 
 ### Settings
 - [ ] Profile name and email update correctly
 - [ ] Theme toggle switches light/dark/system
 - [ ] CSV export downloads file with correct data
 
-### UI/UX
-- [ ] Dark mode works across all pages
-- [ ] Mobile sidebar opens and closes
-- [ ] All loading skeletons shown during data fetch
-- [ ] Empty states shown when no data
-- [ ] Error states shown with retry button on API failure
-- [ ] Toast notifications appear for all actions
-- [ ] Animated counters play on dashboard load
-- [ ] Hover on table row prefetches detail page
+---
+
+## Reflection
+
+Building TrackWise reinforced the importance of defining the problem before implementing features.
+
+If given another week, I would focus on:
+
+- Calendar integrations
+- Email reminders for follow-ups
+- Drag-and-drop Kanban workflow
+- Resume version file management
+- Better analytics with trend lines
+- End-to-end testing with Playwright
+
+The MVP currently solves the core problem while leaving room for future expansion.
 
 ---
 
@@ -313,20 +404,17 @@ Backend runs on `http://localhost:5000`
 - [ ] Kanban board view for applications
 - [ ] Bulk actions (bulk delete, bulk status change)
 - [ ] Application tags/labels
-- [ ] Interview notes with rich text editor
 
 ### Medium Term
 - [ ] OAuth (Google, GitHub login)
 - [ ] File attachments for resumes and cover letters
 - [ ] Calendar integration (Google Calendar, Outlook)
 - [ ] Browser extension to save jobs from LinkedIn/Indeed
-- [ ] AI-powered application insights
 
 ### Long Term
 - [ ] Team/recruiter collaboration mode
 - [ ] Job market analytics (salary benchmarks, demand trends)
 - [ ] Resume builder integration
-- [ ] Interview preparation AI coach
 - [ ] Mobile app (React Native)
 
 ---
